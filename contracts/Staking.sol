@@ -83,7 +83,7 @@ contract Staking is
         for (uint256 i; i < len; ++i) {
             require(
                 nftCollection.ownerOf(_tokenIds[i]) == msg.sender,
-                "Can't stake tokens you don't own"
+                "Cant stake tokens you dont own"
             );
             nftCollection.transferFrom(msg.sender, address(this), _tokenIds[i]);
             emit Transfer(address(0), msg.sender, _tokenIds[i]);
@@ -104,7 +104,10 @@ contract Staking is
         stakerBalances[msg.sender].unclaimedXp += rewards;
         uint256 len = _tokenIds.length;
         for (uint256 i; i < len; ++i) {
-            require(stakerAddress[_tokenIds[i]] == msg.sender);
+            require(
+                stakerAddress[_tokenIds[i]] == msg.sender,
+                "You havent staked this token"
+            );
             stakerAddress[_tokenIds[i]] = address(0);
             nftCollection.transferFrom(address(this), msg.sender, _tokenIds[i]);
             emit Transfer(msg.sender, address(0), _tokenIds[i]);

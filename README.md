@@ -26,4 +26,4 @@ In `deploy.js`, change the constructor parameters for the Staking contract to th
 
 In the current implementation, this contract is required to have a balance of the reward token in order to distribute it, as `safeTransfer` transfers from the `caller` to the `to account` as per the `SafeERC20` spec.
 
-You can change `claimRewards()` to use `mint()`, but that requires that the reward token contract has a properly implemented `mint()` function.
+You can change `claimRewards()` to use `mint()` instead of `safeTransfer()`, but that requires that the reward token contract has a properly implemented `mint()` function.
